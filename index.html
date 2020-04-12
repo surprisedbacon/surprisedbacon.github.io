@@ -2,28 +2,18 @@
 <HTML>
   <HEAD>
     <!--
-      1) [JS] setTimeOut(), show alert after 1s. (done)
-      1.5) [HTML, JS]  on click, read name from Input in alert above (done)
-      2) [HTML, JS] button that creates concatenated messages.
-      2.5) [HTML, JS] make the messages on random parts of the screen.
-      3) [CSS] button that changes background colour
+      {EXERCISE APP}
+      1) button to start routine
+      2) working clock to count 3:00
+      3) flash 3 times before start (countdown)
+      4) colour change at start to red
+      5) at 45 sec, colour change to green
+      6) 3 sec before next min, flash
+
+      colours: https://www.colorcombos.com/color-schemes/5475/ColorCombo5475.html
     -->
-    <link rel='stylesheet' href='styles.css'>
-    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
-    <script src='index.js'></script>
-    
   </HEAD>
-  <BODY onload="domReady()" style="background-color: palegoldenrod" id='body'>
-    <div>
-      <label id="userLabel" for="user">Enter your name:</label>
-      <input type="text" id="user" value="egg">
-      <button id='hi' type='button'>Hi!</button>
-    </div>
-    <br>
-    <button id='bruh' type='button' onclick='bruhFunction()'>Bruh.</button>
-    <br>
-    <div id='bruhdiv' style="transform: translate(10px, 10px)">Bruh. </div>
-    <br>
-    <button id='wow' type='button' onclick='wowFunction()'>wOw!</button>
+  <BODY>
+    <button type="button">START</button>
   </BODY>
 </HTML>
