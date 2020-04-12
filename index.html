@@ -3,15 +3,27 @@
   <HEAD>
     <!--
       1) [JS] setTimeOut(), show alert after 1s. (done)
-      1.5) [HTML, JS]  On click, read name from Input in alert above
-      2) [HTML, JS] button that creates messages on random part of screen.
+      1.5) [HTML, JS]  on click, read name from Input in alert above (done)
+      2) [HTML, JS] button that creates concatenated messages.
+      2.5) [HTML, JS] make the messages on random parts of the screen.
       3) [CSS] button that changes background colour
     -->
-    <link href='styles.css'>
+    <link rel='stylesheet' href='styles.css'>
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
     <script src='index.js'></script>
     
   </HEAD>
-  <BODY onload="domReady()">
-    <button id='hi' type='button'>Hi!</button>
+  <BODY onload="domReady()" style="background-color: palegoldenrod" id='body'>
+    <div>
+      <label id="userLabel" for="user">Enter your name:</label>
+      <input type="text" id="user" value="egg">
+      <button id='hi' type='button'>Hi!</button>
+    </div>
+    <br>
+    <button id='bruh' type='button' onclick='bruhFunction()'>Bruh.</button>
+    <br>
+    <div id='bruhdiv' style="transform: translate(10px, 10px)">Bruh. </div>
+    <br>
+    <button id='wow' type='button' onclick='wowFunction()'>wOw!</button>
   </BODY>
 </HTML>
