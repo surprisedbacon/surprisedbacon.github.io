@@ -3,17 +3,23 @@
   <HEAD>
     <!--
       {EXERCISE APP}
-      1) button to start routine
-      2) working clock to count 3:00
-      3) flash 3 times before start (countdown)
+      1) button to start routine (done)
+      2) working clock to count 3:00 (done)
+      3) countdown from 3 & flash 3 times before start (countdown)
       4) colour change at start to red
       5) at 45 sec, colour change to green
       6) 3 sec before next min, flash
 
       colours: https://www.colorcombos.com/color-schemes/5475/ColorCombo5475.html
     -->
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
   </HEAD>
-  <BODY>
-    <button type="button">START</button>
+  <BODY onload="domReady()" id='body'>
+    <div class='flex-container'>
+      <p id='demo'></p>
+      <button type="button" id='start' onclick='toggleButton()'>START</button>
+    </div>
   </BODY>
 </HTML>
