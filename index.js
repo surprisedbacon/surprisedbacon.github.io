@@ -10,7 +10,7 @@ function toggleButton() {
   var demo = document.getElementById("demo");
   bodyStyle['background-color'] = '#E3493B'
   demo.innerHTML = "3:00";
-  var distance = 16;
+  var distance = 180;
 
   // Update the count down every 1 second
   var x = setInterval(function() {
