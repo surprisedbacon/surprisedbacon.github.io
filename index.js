@@ -27,11 +27,11 @@ const routines = [{
 }, {
   name: "3",
   type: "work",
-  time: 10
+  time: 7
 // }, {
 //   name: "4",
 //   type: "rest",
-//   time: 15
+//   time: 5
 // }, {
 //   name: "5",
 //   type: "work",
@@ -42,15 +42,17 @@ const routines = [{
   // time: 15
 }];
 
-function startRoutine() {
+async function startRoutine() {
   START_BUTTON.style.display = 'none';
 
-  let delay = 0;
-  routines.forEach((routine, i) => {
-    console.log(`Routine ${routine.name} starts in ${delay}ms...`);
-    setTimeout(runChunk, delay, routine);
-    delay += routine.time * 1000;
-  });
+  for (let i=0; i<routines.length; i++) {
+    const routine = routines[i];
+    console.log(`Routine ${routine.name} starts...`);
+    await runChunk(routine);
+  };
+  
+  START_BUTTON.style.display = 'block';
+  BODY_STYLE['background-color'] = "#A9DDD9";
 }
 
 /**
@@ -60,39 +62,41 @@ function startRoutine() {
  * @param {number} routine.time - The number of seconds to run.
  */
 function runChunk(routine) {
-  let counter = routine.time;
-  let minutes = Math.floor(counter / 60);
-  let seconds = Math.floor(counter % 60);
+  return new Promise((resolve) => {
+    let counter = routine.time;
+    let minutes = Math.floor(counter / 60);
+    let seconds = Math.floor(counter % 60);
 
-  CLOCK.innerHTML = `${minutes}:${String(seconds).padStart(2, '0')}`;
-  const s = setInterval(function() {
-    --counter;
-    console.log(`${routine.name} - ${counter}`);
-    
-    minutes = Math.floor(counter / 60);
-    seconds = Math.floor(counter % 60);
+    if (routine.type === 'work') {
+      BODY_STYLE['background-color'] = '#E3493B';
+      console.log(`set BG to red`);
+    } else if (routine.type === 'rest') {
+      BODY_STYLE['background-color'] = '#23B5AF'
+      console.log(`set BG to blue`);
+    }
+
     CLOCK.innerHTML = `${minutes}:${String(seconds).padStart(2, '0')}`;
-    // insert code here
-    // if (counter === routine.time) {
-      // }
-      
+
+    const s = setInterval(function() {
+      counter--;
+      minutes = Math.floor(counter / 60);
+      seconds = Math.floor(counter % 60);
+      CLOCK.innerHTML = `${minutes}:${String(seconds).padStart(2, '0')}`;
+      console.log(`${routine.type}(${routine.name}) - ${minutes}:${String(seconds).padStart(2, '0')}`);
+
       if (counter === 0) {
         if (routine.type === 'work') {
           BODY_STYLE['animation'] = 'redblue 1s';
+          console.log(`transition to blue`);
         } else if (routine.type === 'rest') {
           BODY_STYLE['animation'] = 'bluered 1s';
+          console.log(`transition to red`);
         }
+        clearInterval(s);
+        resolve();
       }
-      
-      if (routine.type === 'work') {
-        BODY_STYLE['background-color'] = '#E3493B';
-      } else if (routine.type === 'rest') {
-        BODY_STYLE['background-color'] = '#23B5AF'
-      }
-    if (counter === 0) {
-      clearInterval(s);
-    }
-  }, 1000);
+    }, 1000);
+  });
 }
 
 
