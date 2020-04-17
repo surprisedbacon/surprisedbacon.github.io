@@ -22,27 +22,27 @@ const routines = [{
 }, {
   name: '1',
   type: 'work',
-  time: 5
+  time: 45
 }, {
   name: '2',
   type: 'rest',
-  time: 5
+  time: 15
 }, {
   name: '3',
   type: 'work',
-  time: 7
-// }, {
-//   name: '4',
-//   type: 'rest',
-//   time: 5
-// }, {
-//   name: '5',
-//   type: 'work',
-//   time: 45
+  time: 45
+}, {
+  name: '4',
+  type: 'rest',
+  time: 15
+}, {
+  name: '5',
+  type: 'work',
+  time: 60
 // }, {
 //   name: '6',
 //   type: 'rest',
-  // time: 15
+//   time: 15
 }];
 
 async function startRoutine() {
@@ -52,7 +52,7 @@ async function startRoutine() {
 
   for (let i=0; i<routines.length; i++) {
     const routine = routines[i];
-    console.log(`Routine ${routine.name} starts...`);
+    // console.log(`Routine ${routine.name} starts...`);
     await runChunk(routine);
   };
   
@@ -77,14 +77,14 @@ function runChunk(routine) {
       CLOCK.style['color'] = '#3A3A3C';
       MSG.style['color'] = '#3A3A3C';
       MSG.innerHTML = routine.type.toUpperCase();
-      console.log(`transition to red`);
+      // console.log(`transition to red`);
     } else if (routine.type === 'rest') {
       BODY_STYLE['animation'] = 'redblue 1s';
       BODY_STYLE['background-color'] = '#23B5AF'
       CLOCK.style['color'] = '#3A3A3C';
       MSG.style['color'] = '#3A3A3C';
       MSG.innerHTML = routine.type.toUpperCase();
-      console.log(`transition to blue`);
+      // console.log(`transition to blue`);
     } else if (routine.type === 'countdown') {
       BODY_STYLE['background-color'] = '#3A3A3C';
       MSG.style['color'] = '#FFFAFA';
@@ -96,7 +96,7 @@ function runChunk(routine) {
     const s = setInterval(function() {
       counter--;
       updateClock(counter, routine.type);
-      console.log(`${routine.type}(${routine.name}) - ${counter}`);
+      // console.log(`${routine.type}(${routine.name}) - ${counter}`);
 
       if (counter === 0) {
         clearInterval(s);
@@ -111,63 +111,4 @@ function updateClock(counter, type) {
   let seconds = Math.floor(counter % 60);
 
   CLOCK.innerHTML = type === "countdown" ? counter : `${minutes}:${String(seconds).padStart(2, '0')}`;
-}
-
-function toggleButton() {
-  var button = document.getElementById('start');
-  var bodyStyle = document.getElementById('body').style;
-  var demoStyle = document.getElementById('demo').style;
-  var demo = document.getElementById('demo');
-  button.style.display = 'none';
-  
-  bodyStyle['background-color'] = '#E3493B'
-  demo.innerHTML = '3:00';
-  var distance = 180;
-  
-  // Update the count down every 1 second
-  var x = setInterval(function() {
-    // Find the distance between now and the count down date
-    --distance;
-    console.log(distance);
-    
-    // Time calculations for minutes and seconds
-    var minutes = Math.floor(distance / 60);
-    var seconds = Math.floor(distance % 60);
-    
-    // Output the result in an element with id='demo'
-    if (seconds >= 10) {
-      demo.innerHTML = minutes + ':' + seconds;
-      // } else if (seconds < 1 && minutes < 0) {
-        //   debugger;  
-      } else {
-        demo.innerHTML = minutes + ':0' + seconds;
-      }
-      
-    // Colour change at certain times
-    if (distance === 135 || distance === 75 || distance === 15) { //automate process: -0:45,then -1:00, -1:00, etc
-      bodyStyle['animation'] = 'redblue 1s';
-    }
-
-    if (distance === 14 || distance === 134 || distance === 74) {
-      bodyStyle['animation'] = '';
-      bodyStyle['background-color'] = '#23B5AF';
-    }
-
-    if (distance === 119 || distance === 59) {
-      bodyStyle['background-color'] = '#E3493B'
-    }
-
-    if (distance === 120 || distance === 60) {
-      bodyStyle['animation'] = 'bluered 1s'
-    };
-    // If the count down is over, write some text 
-    if (distance === 0) {
-      clearInterval(x);
-      button.style.display = 'block';
-      demo.innerHTML = 'done!';
-      bodyStyle['background-color'] = '#A9DDD9'
-      button.focus();
-    }
-  }, 1000);
-  
 }
