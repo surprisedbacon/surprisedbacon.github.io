@@ -5,6 +5,8 @@ button {
   padding: 10px;
   font-size: 50px;
   font-family: "Lucida Console", monospace;
+  width: 200px;
+  margin: 0 auto;
 }
 
 body {
@@ -14,9 +16,8 @@ body {
 .flex-container {
   display: flex;
   height: -webkit-fill-available;
-  
   margin: auto;
-  width: 200px;
+  
   padding: 10px;
   text-align: center;
 
@@ -24,10 +25,10 @@ body {
   flex-direction: column;
 }
 
-p {
+#clock {
   font-weight: bold;
   font-family: "Lucida Console", monospace;
-  font-size: 25px;
+  font-size: 15em;
   color: #3A3A3C
 }
 

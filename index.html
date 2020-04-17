@@ -5,10 +5,9 @@
       {EXERCISE APP}
       1) button to start routine (done)
       2) working clock to count 3:00 (done)
-      3) countdown from 3 & flash 3 times before start (countdown)
-      4) colour change at start to red 
-      5) at 45 sec, colour change to green (done)
-      6) 3 sec before next min, flash 
+      3) colour change at start to red (done)
+      4) at 45 sec, colour change to green (done)
+      5) 3 sec before next min, flash 
 
       colours: https://www.colorcombos.com/color-schemes/5475/ColorCombo5475.html
     -->
@@ -18,8 +17,8 @@
   </HEAD>
   <BODY onload="domReady()" id='body'>
     <div class='flex-container'>
-      <p id='demo'></p>
-      <button type="button" id='start' onclick='toggleButton()'>START</button>
+      <div id='clock'></div>
+      <button type="button" id='start' onclick='startRoutine()'>START</button>
     </div>
   </BODY>
 </HTML>
