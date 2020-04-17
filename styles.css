@@ -1,7 +1,7 @@
 button {
   border: none;
   background-color: #3A3A3C;
-  color: snow;
+  color: #fffafa;
   padding: 10px;
   font-size: 50px;
   font-family: "Lucida Console", monospace;
@@ -16,13 +16,17 @@ body {
 .flex-container {
   display: flex;
   height: -webkit-fill-available;
-  margin: auto;
-  
-  padding: 10px;
-  text-align: center;
-
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#msg {
+  position: absolute;
+  top: 10%;
+  font-family: "Lucida Console", monospace;
+  font-size: 6em;
+  color: #3A3A3C
 }
 
 #clock {
@@ -39,5 +43,10 @@ body {
 
 @keyframes bluered {
   from {background-color: #23B5AF;}
+  to {background-color: #E3493B;}
+}
+
+@keyframes blackred {
+  from {background-color: #3A3A3C;}
   to {background-color: #E3493B;}
 }

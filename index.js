@@ -4,46 +4,51 @@ req:
   2) code cleanup
   3) automation (repeated code instead of hardcode)
 */
-let BODY_STYLE;
-let CLOCK
-let START_BUTTON;
+let BODY_STYLE, CLOCK, MSG, START_BUTTON;
 
 function domReady() {
-  console.log("dom is ready");
+  console.log('dom is ready');
   START_BUTTON = document.getElementById('start'); 
   START_BUTTON.focus();
   BODY_STYLE = document.getElementById('body').style;
   CLOCK = document.getElementById('clock');
+  MSG = document.getElementById('msg');
 }
 
 const routines = [{
-  name: "1",
-  type: "work",
+  name: '0',
+  type: 'countdown',
+  time: 3
+}, {
+  name: '1',
+  type: 'work',
   time: 5
 }, {
-  name: "2",
-  type: "rest",
-  time: 10
+  name: '2',
+  type: 'rest',
+  time: 5
 }, {
-  name: "3",
-  type: "work",
+  name: '3',
+  type: 'work',
   time: 7
 // }, {
-//   name: "4",
-//   type: "rest",
+//   name: '4',
+//   type: 'rest',
 //   time: 5
 // }, {
-//   name: "5",
-//   type: "work",
+//   name: '5',
+//   type: 'work',
 //   time: 45
 // }, {
-//   name: "6",
-//   type: "rest",
+//   name: '6',
+//   type: 'rest',
   // time: 15
 }];
 
 async function startRoutine() {
   START_BUTTON.style.display = 'none';
+  MSG.innerHTML = '';
+  CLOCK.innerHTML = '';
 
   for (let i=0; i<routines.length; i++) {
     const routine = routines[i];
@@ -52,7 +57,8 @@ async function startRoutine() {
   };
   
   START_BUTTON.style.display = 'block';
-  BODY_STYLE['background-color'] = "#A9DDD9";
+  BODY_STYLE['background-color'] = '#A9DDD9';
+  MSG.innerHTML = 'done!';
 }
 
 /**
@@ -64,34 +70,35 @@ async function startRoutine() {
 function runChunk(routine) {
   return new Promise((resolve) => {
     let counter = routine.time;
-    let minutes = Math.floor(counter / 60);
-    let seconds = Math.floor(counter % 60);
-
+    
     if (routine.type === 'work') {
+      BODY_STYLE['animation'] = routine.name === '1' ? 'blackred 1s' : 'bluered 1s';
       BODY_STYLE['background-color'] = '#E3493B';
-      console.log(`set BG to red`);
+      CLOCK.style['color'] = '#3A3A3C';
+      MSG.style['color'] = '#3A3A3C';
+      MSG.innerHTML = routine.type.toUpperCase();
+      console.log(`transition to red`);
     } else if (routine.type === 'rest') {
+      BODY_STYLE['animation'] = 'redblue 1s';
       BODY_STYLE['background-color'] = '#23B5AF'
-      console.log(`set BG to blue`);
+      CLOCK.style['color'] = '#3A3A3C';
+      MSG.style['color'] = '#3A3A3C';
+      MSG.innerHTML = routine.type.toUpperCase();
+      console.log(`transition to blue`);
+    } else if (routine.type === 'countdown') {
+      BODY_STYLE['background-color'] = '#3A3A3C';
+      MSG.style['color'] = '#FFFAFA';
+      MSG.innerHTML = 'Get Ready!';
+      CLOCK.style['color'] = '#FFFAFA';
     }
-
-    CLOCK.innerHTML = `${minutes}:${String(seconds).padStart(2, '0')}`;
+    updateClock(counter, routine.type);
 
     const s = setInterval(function() {
       counter--;
-      minutes = Math.floor(counter / 60);
-      seconds = Math.floor(counter % 60);
-      CLOCK.innerHTML = `${minutes}:${String(seconds).padStart(2, '0')}`;
-      console.log(`${routine.type}(${routine.name}) - ${minutes}:${String(seconds).padStart(2, '0')}`);
+      updateClock(counter, routine.type);
+      console.log(`${routine.type}(${routine.name}) - ${counter}`);
 
       if (counter === 0) {
-        if (routine.type === 'work') {
-          BODY_STYLE['animation'] = 'redblue 1s';
-          console.log(`transition to blue`);
-        } else if (routine.type === 'rest') {
-          BODY_STYLE['animation'] = 'bluered 1s';
-          console.log(`transition to red`);
-        }
         clearInterval(s);
         resolve();
       }
@@ -99,16 +106,22 @@ function runChunk(routine) {
   });
 }
 
+function updateClock(counter, type) {
+  let minutes = Math.floor(counter / 60);
+  let seconds = Math.floor(counter % 60);
+
+  CLOCK.innerHTML = type === "countdown" ? counter : `${minutes}:${String(seconds).padStart(2, '0')}`;
+}
 
 function toggleButton() {
   var button = document.getElementById('start');
   var bodyStyle = document.getElementById('body').style;
   var demoStyle = document.getElementById('demo').style;
-  var demo = document.getElementById("demo");
+  var demo = document.getElementById('demo');
   button.style.display = 'none';
   
   bodyStyle['background-color'] = '#E3493B'
-  demo.innerHTML = "3:00";
+  demo.innerHTML = '3:00';
   var distance = 180;
   
   // Update the count down every 1 second
@@ -121,13 +134,13 @@ function toggleButton() {
     var minutes = Math.floor(distance / 60);
     var seconds = Math.floor(distance % 60);
     
-    // Output the result in an element with id="demo"
+    // Output the result in an element with id='demo'
     if (seconds >= 10) {
-      demo.innerHTML = minutes + ":" + seconds;
+      demo.innerHTML = minutes + ':' + seconds;
       // } else if (seconds < 1 && minutes < 0) {
         //   debugger;  
       } else {
-        demo.innerHTML = minutes + ":0" + seconds;
+        demo.innerHTML = minutes + ':0' + seconds;
       }
       
     // Colour change at certain times
@@ -137,7 +150,7 @@ function toggleButton() {
 
     if (distance === 14 || distance === 134 || distance === 74) {
       bodyStyle['animation'] = '';
-      bodyStyle['background-color'] = "#23B5AF";
+      bodyStyle['background-color'] = '#23B5AF';
     }
 
     if (distance === 119 || distance === 59) {
@@ -151,7 +164,7 @@ function toggleButton() {
     if (distance === 0) {
       clearInterval(x);
       button.style.display = 'block';
-      demo.innerHTML = "done!";
+      demo.innerHTML = 'done!';
       bodyStyle['background-color'] = '#A9DDD9'
       button.focus();
     }
