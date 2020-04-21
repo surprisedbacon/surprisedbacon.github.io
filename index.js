@@ -24,7 +24,7 @@ const routines = [{
 }, {
   name: '1',
   type: 'work',
-  time: 15
+  time: 45
 }, {
   name: '2',
   type: 'rest',
@@ -32,7 +32,7 @@ const routines = [{
 }, {
   name: '3',
   type: 'work',
-  time: 15
+  time: 45
 }, {
   name: '4',
   type: 'rest',
@@ -40,7 +40,7 @@ const routines = [{
 }, {
   name: '5',
   type: 'work',
-  time: 10
+  time: 60
 // }, {
 //   name: '6',
 //   type: 'rest',
