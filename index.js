@@ -4,7 +4,7 @@ req:
   2) code cleanup
   3) automation (repeated code instead of hardcode)
 */
-let BODY_STYLE, CLOCK, MSG, START_BUTTON, BEEP3_AUDIO, BEEP5_AUDIO;
+let BODY_STYLE, CLOCK, MSG, START_BUTTON, BEEP3_AUDIO, BEEP5_AUDIO, FANFARE_AUDIO;
 
 function domReady() {
   console.log('dom is ready');
@@ -15,6 +15,7 @@ function domReady() {
   MSG = document.getElementById('msg');
   BEEP3_AUDIO = document.getElementById('beep3Audio');
   BEEP5_AUDIO = document.getElementById('beep5Audio');
+  FANFARE_AUDIO = document.getElementById('fanfareAudio');
 }
 
 const routines = [{
@@ -58,9 +59,11 @@ async function startRoutine() {
     await runChunk(routine);
   };
   
+  FANFARE_AUDIO.play();
   START_BUTTON.style.display = 'block';
   BODY_STYLE['background-color'] = '#A9DDD9';
   MSG.innerHTML = 'done!';
+  START_BUTTON.focus();
 }
 
 /**
