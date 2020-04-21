@@ -4,7 +4,7 @@ req:
   2) code cleanup
   3) automation (repeated code instead of hardcode)
 */
-let BODY_STYLE, CLOCK, MSG, START_BUTTON;
+let BODY_STYLE, CLOCK, MSG, START_BUTTON, BEEP3_AUDIO, BEEP5_AUDIO;
 
 function domReady() {
   console.log('dom is ready');
@@ -13,6 +13,8 @@ function domReady() {
   BODY_STYLE = document.getElementById('body').style;
   CLOCK = document.getElementById('clock');
   MSG = document.getElementById('msg');
+  BEEP3_AUDIO = document.getElementById('beep3Audio');
+  BEEP5_AUDIO = document.getElementById('beep5Audio');
 }
 
 const routines = [{
@@ -22,7 +24,7 @@ const routines = [{
 }, {
   name: '1',
   type: 'work',
-  time: 45
+  time: 15
 }, {
   name: '2',
   type: 'rest',
@@ -30,7 +32,7 @@ const routines = [{
 }, {
   name: '3',
   type: 'work',
-  time: 45
+  time: 15
 }, {
   name: '4',
   type: 'rest',
@@ -38,7 +40,7 @@ const routines = [{
 }, {
   name: '5',
   type: 'work',
-  time: 60
+  time: 10
 // }, {
 //   name: '6',
 //   type: 'rest',
@@ -86,6 +88,7 @@ function runChunk(routine) {
       MSG.innerHTML = routine.type.toUpperCase();
       // console.log(`transition to blue`);
     } else if (routine.type === 'countdown') {
+      BEEP3_AUDIO.play();
       BODY_STYLE['background-color'] = '#3A3A3C';
       MSG.style['color'] = '#FFFAFA';
       MSG.innerHTML = 'Get Ready!';
@@ -97,6 +100,10 @@ function runChunk(routine) {
       counter--;
       updateClock(counter, routine.type);
       // console.log(`${routine.type}(${routine.name}) - ${counter}`);
+
+      if (counter === 5 && (routine.type === 'work' || routine.type === 'rest')) {
+        BEEP5_AUDIO.play();
+      }
 
       if (counter === 0) {
         clearInterval(s);
