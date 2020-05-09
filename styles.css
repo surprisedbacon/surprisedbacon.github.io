@@ -1,3 +1,7 @@
+body {
+  font-family: "Lucida Console", monospace;
+}
+
 button {
   border: none;
   background-color: #3A3A3C;
@@ -7,11 +11,89 @@ button {
   font-family: "Lucida Console", monospace;
   width: auto;
   margin: 0 auto;
+  display: block;
+}
+
+li {
+  border: 3px solid #3A3A3C;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+}
+
+span {
+  display: inline-block;
+  line-height: 25px;
+  vertical-align: middle;
+}
+
+.subtitle {
+  margin-bottom: 10px;
+}
+
+.gear-icon {
+  height: 25px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.close-icon {
+  height: 50px;
+  width: 50px;
+}
+
+.column {
+  width: 48%;
+  height: 80%;
+  vertical-align: top;
+  display: inline-block;
+} 
+
+.routineList {
+  border-radius: 50px 0px 0px 50px;
+  border: 5px solid #3A3A3C;
+  height: 75%;
+  list-style-type: none;
+  padding-inline-start: unset;
+  padding: 30px;
+  overflow: auto;
+}
+
+.title {
+  font-weight: bolder;
+  font-size: 35px;
+  color: #3A3A3C;
+  line-height: 50px;
+  text-align: center;
+}
+
+.header {
+  font-weight: bolder;
+  font-size: 25px;
+  color: #3A3A3C;
+}
+
+#x {
+  background-color: transparent;
+  color: #3A3A3C;
+  padding: 0px;
+  outline: none;
+  position: absolute;
+  right: 35px;
+}
+
+.action {
+  margin: 30px;
 }
 
 #settings {
   font-size: 20px;
   margin-top: 10px;
+}
+
+#done {
+  width: 20%
+  font-size: 25px;
 }
 
 body {
@@ -28,6 +110,8 @@ body {
   background-color: white;
   height: 55%;
   width: 50%;
+  user-select: none;
+  /* display: none; */
 }
 
 .flex-container {

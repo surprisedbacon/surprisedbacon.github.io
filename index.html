@@ -14,26 +14,47 @@
 
     <link rel="stylesheet" href="styles.css">
     <script src="index.js"></script>
-    <script src="https://kit.fontawesome.com/10f3894e96.js" crossorigin="anonymous"></script>
   </HEAD>
   <BODY onload="domReady()" id='body' class='flex-container'>
     <div class='flex-container'>
       <div id='msg'></div>
       <div id='clock'></div>
-      <button type="button" id='start' onclick='startRoutine()'>START</button>
-      <button type="button" id='settings' onclick>CHANGE ROUTINE <i class="fas fa-cog"></i></button>
+      <div id='button-group'>
+        <div class='title'>EXERCISE APP</div>
+        <div class='subtitle'>AN EASY WAY TO SET TIME INTERVALS FOR YOUR WORKOUTS!</div>
+        <button type="button" id='start' onclick='startRoutine()'>START</button>
+        <button type="button" id='settings' onclick='showPopup()'>
+          <span>CHANGE ROUTINE</span>
+          <img class='gear-icon' src='cog-solid.png'>
+        </button>
+      </div>
     </div>
     <div id='popup'>
-      <div id='type-action'>
-        <div class='header'>TYPE:</div>
-        <input type='radio' name='type' value='work'>WORK<br>
-        <input type='radio' name='type' value='rest'>REST<br>
+      <button type='button' id='x' onclick='hidePopup()'><img class='close-icon' src='times-circle-solid.png'></button>
+      <div class='title'>CREATE YOUR ROUTINE!</div>
+      <div class='column'>
+        <div class='action'>
+          <div class='header'>TYPE:</div>
+          <input type='radio' name='type' value='work' id='work' checked>
+          <label for='work'>WORK</label><br>
+          <input type='radio' name='type' value='rest' id='rest'>
+          <label for='rest'>REST</label>
+        </div>
+        <div class='action'>
+          <div class='header'>TIME:</div>
+          <input type='number' id='time' value='30'> seconds
+        </div>
+        <div class='action'>
+        <button type="button" id='done' onclick='addInterval()'>ADD</button>
+        </div>
       </div>
-      <div id='time-action'>
-        <div class='header'>TIME:</div>
-        <input type='number' value='time'>
+      <div class='column'>
+        <ul id='routine' class='action routineList'>
+          <li onclick='removeTask(this)'>work for 45s</li>
+          <li onclick='removeTask(this)'>rest for 15s</li>
+        </ul>
       </div>
-    </div>
+  </div>
     <audio id="beep3Audio">
       <source src="beep3.mp3" type="audio/mpeg">
       Your browser does not support the audio element.

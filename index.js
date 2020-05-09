@@ -3,19 +3,21 @@ req:
   1) workTime, restTime, reps
   2) code cleanup
   3) automation (repeated code instead of hardcode)
-*/
-let BODY_STYLE, CLOCK, MSG, START_BUTTON, BEEP3_AUDIO, BEEP5_AUDIO, FANFARE_AUDIO;
-
-function domReady() {
-  console.log('dom is ready');
-  START_BUTTON = document.getElementById('start'); 
-  START_BUTTON.focus();
-  BODY_STYLE = document.getElementById('body').style;
-  CLOCK = document.getElementById('clock');
-  MSG = document.getElementById('msg');
-  BEEP3_AUDIO = document.getElementById('beep3Audio');
-  BEEP5_AUDIO = document.getElementById('beep5Audio');
-  FANFARE_AUDIO = document.getElementById('fanfareAudio');
+  */
+ let BODY_STYLE, CLOCK, MSG, START_BUTTON, BEEP3_AUDIO, BEEP5_AUDIO, FANFARE_AUDIO;
+ 
+ function domReady() {
+   console.log('dom is ready');
+   START_BUTTON = document.getElementById('start'); 
+   START_BUTTON.focus();
+   BUTTONS = document.getElementById('button-group');
+   BODY_STYLE = document.getElementById('body').style;
+   CLOCK = document.getElementById('clock');
+   MSG = document.getElementById('msg');
+   BEEP3_AUDIO = document.getElementById('beep3Audio');
+   BEEP5_AUDIO = document.getElementById('beep5Audio');
+   FANFARE_AUDIO = document.getElementById('fanfareAudio');
+   const popup = document.getElementById('popup');
 }
 
 const routines = [{
@@ -48,8 +50,34 @@ const routines = [{
 //   time: 15
 }];
 
+function hidePopup() {
+  popup.style.display = 'none';
+}
+
+function showPopup() {
+  popup.style.display = 'block';
+}
+
+function removeTask(e) {
+  console.log('removed task');
+  e.remove();
+}
+
+function addInterval() {
+  const type = document.querySelector('input[name="type"]:checked').value;
+  const time = document.querySelector('input[id="time"]').value
+
+  const li = document.createElement("li");
+  li.addEventListener('click', (me) => {
+    // console.log('removed task', me);
+    removeTask(me.target);
+  })
+  li.appendChild(document.createTextNode(`${type} for ${time}s`));
+  document.getElementById("routine").appendChild(li);
+}
+
 async function startRoutine() {
-  START_BUTTON.style.display = 'none';
+  BUTTONS.style.display = 'none';
   MSG.innerHTML = '';
   CLOCK.innerHTML = '';
 
@@ -60,7 +88,7 @@ async function startRoutine() {
   };
   
   FANFARE_AUDIO.play();
-  START_BUTTON.style.display = 'block';
+  BUTTONS.style.display = 'block';
   BODY_STYLE['background-color'] = '#A9DDD9';
   MSG.innerHTML = 'done!';
   START_BUTTON.focus();
