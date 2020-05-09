@@ -5,12 +5,29 @@ button {
   padding: 10px;
   font-size: 50px;
   font-family: "Lucida Console", monospace;
-  width: 200px;
+  width: auto;
   margin: 0 auto;
+}
+
+#settings {
+  font-size: 20px;
+  margin-top: 10px;
 }
 
 body {
   background-color: #A9DDD9;
+}
+
+#popup {
+  position: absolute;
+  font-family: "Lucida Console", monospace;
+  padding: 35px;
+  z-index: 5;
+  border: 14px solid #3A3A3C;
+  border-radius: 58px;
+  background-color: white;
+  height: 55%;
+  width: 50%;
 }
 
 .flex-container {

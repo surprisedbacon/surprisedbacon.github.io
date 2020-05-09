@@ -14,12 +14,25 @@
 
     <link rel="stylesheet" href="styles.css">
     <script src="index.js"></script>
+    <script src="https://kit.fontawesome.com/10f3894e96.js" crossorigin="anonymous"></script>
   </HEAD>
-  <BODY onload="domReady()" id='body'>
+  <BODY onload="domReady()" id='body' class='flex-container'>
     <div class='flex-container'>
       <div id='msg'></div>
       <div id='clock'></div>
       <button type="button" id='start' onclick='startRoutine()'>START</button>
+      <button type="button" id='settings' onclick>CHANGE ROUTINE <i class="fas fa-cog"></i></button>
+    </div>
+    <div id='popup'>
+      <div id='type-action'>
+        <div class='header'>TYPE:</div>
+        <input type='radio' name='type' value='work'>WORK<br>
+        <input type='radio' name='type' value='rest'>REST<br>
+      </div>
+      <div id='time-action'>
+        <div class='header'>TIME:</div>
+        <input type='number' value='time'>
+      </div>
     </div>
     <audio id="beep3Audio">
       <source src="beep3.mp3" type="audio/mpeg">
