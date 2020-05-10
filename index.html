@@ -20,8 +20,10 @@
       <div id='msg'></div>
       <div id='clock'></div>
       <div id='button-group'>
-        <div class='title'>EXERCISE APP</div>
-        <div class='subtitle'>AN EASY WAY TO SET TIME INTERVALS FOR YOUR WORKOUTS!</div>
+        <div id='titles'>
+          <div class='title'>*✧･ﾟ:* EXERCISE APP *:･ﾟ✧*</div>
+          <div class='subtitle'>AN EASY WAY TO SET TIME INTERVALS FOR YOUR WORKOUTS!</div>
+        </div>
         <button type="button" id='start' onclick='startRoutine()'>START</button>
         <button type="button" id='settings' onclick='showPopup()'>
           <span>CHANGE ROUTINE</span>
@@ -50,8 +52,11 @@
       </div>
       <div class='column'>
         <ul id='routine' class='action routineList'>
-          <li onclick='removeTask(this)'>work for 45s</li>
-          <li onclick='removeTask(this)'>rest for 15s</li>
+          <li onclick='removeTask(this)' type='work' time=45>WORK for 45s <img src='trash-alt-solid.png'></li>
+          <li onclick='removeTask(this)' type='rest' time=15>REST for 15s <img src='trash-alt-solid.png'></li>
+          <li onclick='removeTask(this)' type='work' time=45>WORK for 45s <img src='trash-alt-solid.png'></li>
+          <li onclick='removeTask(this)' type='rest' time=15>REST for 15s <img src='trash-alt-solid.png'></li>
+          <li onclick='removeTask(this)' type='work' time=45>WORK for 60s <img src='trash-alt-solid.png'></li>
         </ul>
       </div>
   </div>
@@ -67,5 +72,10 @@
       <source src="fanfare.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
+    <div id='copyright'>
+      made by danae dang
+      ©	05/2020
+      (hi ms. fronk)
+    </div>
   </BODY>
 </HTML>

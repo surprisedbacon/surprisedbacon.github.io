@@ -20,36 +20,6 @@ req:
    const popup = document.getElementById('popup');
 }
 
-const routines = [{
-  name: '0',
-  type: 'countdown',
-  time: 3
-}, {
-  name: '1',
-  type: 'work',
-  time: 45
-}, {
-  name: '2',
-  type: 'rest',
-  time: 15
-}, {
-  name: '3',
-  type: 'work',
-  time: 45
-}, {
-  name: '4',
-  type: 'rest',
-  time: 15
-}, {
-  name: '5',
-  type: 'work',
-  time: 60
-// }, {
-//   name: '6',
-//   type: 'rest',
-//   time: 15
-}];
-
 function hidePopup() {
   popup.style.display = 'none';
 }
@@ -67,19 +37,43 @@ function addInterval() {
   const type = document.querySelector('input[name="type"]:checked').value;
   const time = document.querySelector('input[id="time"]').value
 
+  const trashIcon = document.createElement("img"); //<img src='trash-alt-solid.png'>
+  trashIcon.setAttribute("src", "trash-alt-solid.png");
   const li = document.createElement("li");
   li.addEventListener('click', (me) => {
-    // console.log('removed task', me);
     removeTask(me.target);
   })
-  li.appendChild(document.createTextNode(`${type} for ${time}s`));
+  li.setAttribute('type', type);
+  li.setAttribute('time', time);
+  li.appendChild(document.createTextNode(`${type.toUpperCase()} for ${time}s`));
+  li.appendChild(trashIcon);
   document.getElementById("routine").appendChild(li);
 }
 
+function getRoutineFromConfig() {
+  const intervals = [{
+      name: '0',
+      type: 'countdown',
+      time: 3
+    }];
+
+  const ul = document.getElementById("routine");
+  const items = ul.getElementsByTagName("li");
+  for (let i=0; i<items.length; i++) {
+    console.log(`Inserting `, {name: (i+1).toString(), type: items[i].getAttribute('type'), time: items[i].getAttribute('time')});
+    intervals.push({name: (i+1).toString(), type: items[i].getAttribute('type'), time: items[i].getAttribute('time')});
+  }
+
+  return intervals;
+}
+
 async function startRoutine() {
+  document.getElementById('titles').style.display = 'none';
   BUTTONS.style.display = 'none';
   MSG.innerHTML = '';
   CLOCK.innerHTML = '';
+
+  const routines = getRoutineFromConfig();
 
   for (let i=0; i<routines.length; i++) {
     const routine = routines[i];
