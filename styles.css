@@ -24,6 +24,7 @@ button {
   width: auto;
   margin: 0 auto;
   display: block;
+  cursor: pointer;
 }
 
 li {
@@ -33,6 +34,7 @@ li {
   padding: 5px;
   line-height: 20px;
   text-align: center;
+  cursor: pointer;
 }
 
 li img{
